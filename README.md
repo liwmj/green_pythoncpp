@@ -1,56 +1,63 @@
-# pythoncpp
+# PythonCpp
 
-pythoncpp is a c++ lib,which is to simplify task that embed python and extend python. 
-For example, call python function, register c++ function to python, register c++ class to python. 
-Only one implement c++ header file.
+pythoncpp是C\++库，是嵌入python并注册C\++相关的对象到lua的封装库。
 
-## Project Goals
- * easier to embed python script
- * easier to call python function
- * easier to set or get var in python script
- * easier to extend python with c++ static function
- * easier to extend python with c++ class. C++ class Once registed, python can use it like builtin type.
- * when python exception throw, pythoncpp will wrap it as a std exception which includes python traceback info.
+## 特性
 
-## Supported Python versions
- * python2.5 python2.6 python2.7, win / linux
- * python3.x is being developed, but unfortunately， python3.x api is so different to python2.x, even diffent between python3.2
-	and python3.3, Headache!!
+* 只有头文件
+* 轻量级
+* 高效清洁
+* 容易调用python函数
+* 容易设置或获取var在python脚本
+* 容易使用C\++静态函数扩展python
+* 容易使用C\++类扩展python，python C\++类一旦注册,可以使用它像装入的类型。
+* 当python引发异常，pythoncpp也将返回给C\++。
 
-## Embed Python script in C++
-### Get / Set varialbe in  python script/module
+## 安装
+
+只需要将头文件放置python的include目录下即可使用，当前你也可以选择自己的目录。
+
+
+## 支持
+> 支持python2.5 python2.6 python2.7
+
+
+## 使用
+
+##### 获取/设置可变python脚本/模块
 ``` c++
-	printf("sys.version=%s\n", pythoncpp.get_global_var<string>("sys", "version").c_str());
-    pythoncpp.set_global_var("fftest", "global_var", "OhNice");
-    printf("fftest.global_var=%s\n", pythoncpp.get_global_var<string>("fftest", "global_var").c_str());
+printf("sys.version=%s\n", pythoncpp.get_global_var<string>("sys", "version").c_str());
+pythoncpp.set_global_var("fftest", "global_var", "OhNice");
+printf("fftest.global_var=%s\n", pythoncpp.get_global_var<string>("fftest", "global_var").c_str());
 ```
-### call python function, Support all base type as arg or return value. Nine args can be supported.
+
+##### 调用的python函数，支持所有基本类型作为参数或返回值，支持最多九个参数。
 ``` c++
-	int a1 = 100; float a2 = 3.14f; string a3 = "OhWell";
-    pythoncpp.call<void>("fftest", "test_base", a1, a2, a3);
+int a1 = 100; float a2 = 3.14f; string a3 = "OhWell";
+pythoncpp.call<void>("fftest", "test_base", a1, a2, a3);
 ```
-### call python function, Support all STL type as arg or return value. Nine args can be supported. Vector and List for tuple and list in python,map for dict in python.
+
+##### 调用python函数，支持所有STL类型作为参数或返回值，最多支持九个参数。
 ``` c++
-	vector<int> a1;a1.push_back(100);a1.push_back(200);
-    list<string> a2; a2.push_back("Oh");a2.push_back("Nice");
-    vector<list<string> > a3;a3.push_back(a2);
-    
-    pythoncpp.call<bool>("fftest", "test_stl", a1, a2, a3);
-	typedef map<string, list<vector<int> > > ret_t;
-    ret_t val = pythoncpp.call<ret_t>("fftest", "test_return_stl");
+vector<int> a1;a1.push_back(100);a1.push_back(200);
+list<string> a2; a2.push_back("Oh");a2.push_back("Nice");
+vector<list<string> > a3;a3.push_back(a2);
+
+pythoncpp.call<bool>("fftest", "test_stl", a1, a2, a3);
+typedef map<string, list<vector<int> > > ret_t;
+ret_t val = pythoncpp.call<ret_t>("fftest", "test_return_stl");
 ```
-## Extend Python
-### register c++ static function, all base type supported. Arg num can be nine.
+
+##### 注册c++静态函数，所有基本类型的支持，最多支持九个参数。
 ``` c++
 static int print_val(int a1, float a2, const string& a3, const vector<double>& a4)
 {
     printf("%s[%d,%f,%s,%d]\n", __FUNCTION__, a1, a2, a3.c_str(), a4.size());
     return 0;
 }
-struct ops_t
-{
-    static list<int> return_stl()
-    {
+
+struct ops_t {
+    static list<int> return_stl() {
         list<int> ret;ret.push_back(1024);
         printf("%s\n", __FUNCTION__);
         return ret;
@@ -66,24 +73,23 @@ void test_reg_function()
     pythoncpp.call<void>("fftest", "test_reg_function");
 }
 ```
-### register c++ class, python can use it just like builtin types.
-``` c++
 
+##### 注册C\++类，python可以使用轻松的使用它，就像在本地一样。
+``` c++
 class foo_t
 {
 public:
-	foo_t(int v_):m_value(v_)
-	{
+	foo_t(int v_):m_value(v_) {
 		printf("%s\n", __FUNCTION__);
 	}
-    virtual ~foo_t()
-    {
+    virtual ~foo_t() {
         printf("%s\n", __FUNCTION__);
     }
 	int get_value() const { return m_value; }
+
 	void set_value(int v_) { m_value = v_; }
-	void test_stl(map<string, list<int> >& v_) 
-	{
+
+	void test_stl(map<string, list<int> >& v_) {
 		printf("%s\n", __FUNCTION__);
 	}
 	int m_value;
@@ -92,16 +98,13 @@ public:
 class dumy_t: public foo_t
 {
 public:
-    dumy_t(int v_):foo_t(v_)
-    {
+    dumy_t(int v_):foo_t(v_) {
         printf("%s\n", __FUNCTION__);
     }
-    ~dumy_t()
-    {
+    ~dumy_t() {
         printf("%s\n", __FUNCTION__);
     }
-    void dump() 
-    {
+    void dump() {
         printf("%s\n", __FUNCTION__);
     }
 };
@@ -130,25 +133,29 @@ void test_register_base_class(pythoncpp_t& pythoncpp)
     pythoncpp.call<void>("fftest", "test_register_base_class");
 };
 ```
-### Register c++ class which inherit a class having been registered.
-``` c++	
+
+##### 注册C\++类继承。
+``` c++
 pythoncpp.call<void>("fftest", "test_register_inherit_class");
 ```
-### C++ object pointer can be as a arg to python, and object can be access as a instance of builtin type in python.
-``` c++	
+
+##### C\++可以作为python对象指针，对象实例可以在载入python后进行访问。
+``` c++
 void test_cpp_obj_to_py(pythoncpp_t& pythoncpp)
 {
     foo_t tmp_foo(2013);
     pythoncpp.call<void>("fftest", "test_cpp_obj_to_py", &tmp_foo);
 }
+
 void test_cpp_obj_py_obj(pythoncpp_t& pythoncpp)
 {
     dumy_t tmp_foo(2013);
-    
+
     foo_t* p = pythoncpp.call<foo_t*>("fftest", "test_cpp_obj_py_obj", &tmp_foo);
 }
 ```
-## Python test script
+
+##### python测试脚本
 ``` python
 def test_base(a1, a2, a3):
 	print('test_base', a1, a2, a3)
@@ -206,13 +213,16 @@ def test_cpp_obj_py_obj(dumy):
 	dumy.dump()
 	ext2.obj_test(dumy)
 	print('test_cpp_obj_py_obj', dumy)
-	
+
 	return dumy
 
-``` 
+```
 
-## Summary
-* pythoncpp Only One implement head file, it is easy to itegrate to project.
-* pythoncpp is simplely wrap for python api, so it is efficient.
 
+## 谢谢
+
+欢迎使用，祝使用愉快
+
+* [http://liwangmj.com](http://liwangmj.com)
+* [liwangmj@gmail.com](mailto:liwangmj@gmail.com)
 
