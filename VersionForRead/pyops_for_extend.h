@@ -1,8 +1,31 @@
-﻿#ifndef  _PYTHON_PYOPS_FOR_EXTEND_H
+﻿/* Copyright (C) 2015 Oneiric Tiger.
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License Version 2
+ * as published by the Free Software Foundation; either current version
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License Version 2 for more details.
+ * 
+ * You should have received a copy of the GNU General Public License Version 2
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * 
+ */
+/**
+ * @file pyops_for_extend.h
+ * @author Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+ * @version 1.1.0
+ * @date 2015-05-01
+ */
+
+#ifndef  _PYTHON_PYOPS_FOR_EXTEND_H
 #define  _PYTHON_PYOPS_FOR_EXTEND_H
 
 #include "pyops_base.h"
-
 
 
 //! 用于扩展python的工具类，用来解析参数
