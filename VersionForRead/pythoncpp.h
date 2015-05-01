@@ -1,5 +1,5 @@
-﻿#ifndef _PYTHONCPP_H
-#define _PYTHONCPP_H
+﻿#ifndef _PYTHON_PYTHONCPP_H
+#define _PYTHON_PYTHONCPP_H
 
 #include <Python.h>
 #include <structmember.h>

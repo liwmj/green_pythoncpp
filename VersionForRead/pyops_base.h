@@ -1,5 +1,5 @@
-﻿#ifndef  _PYOPS_BASE_H
-#define  _PYOPS_BASE_H
+﻿#ifndef  _PYTHON_PYOPS_BASE_H
+#define  _PYTHON_PYOPS_BASE_H
 
 
 #include <Python.h>

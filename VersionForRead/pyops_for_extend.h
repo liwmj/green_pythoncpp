@@ -1,5 +1,5 @@
-﻿#ifndef  _PYOPS_FOR_EXTEND_H
-#define  _PYOPS_FOR_EXTEND_H
+﻿#ifndef  _PYTHON_PYOPS_FOR_EXTEND_H
+#define  _PYTHON_PYOPS_FOR_EXTEND_H
 
 #include "pyops_base.h"
 
