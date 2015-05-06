@@ -1,6 +1,6 @@
 # PythonCpp
 
-pythoncpp是C\++库，是嵌入python并注册C\++相关的对象到lua的封装库。
+pythoncpp是C\++库，是嵌入python并注册C\++相关的对象到python的封装库。
 
 ## 特性
 
