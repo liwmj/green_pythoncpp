@@ -26,8 +26,8 @@
 #ifndef _PYTHON_PYTHONCPP_H
 #define _PYTHON_PYTHONCPP_H
 
-#include <Python.h>
-#include <structmember.h>
+#include <python/Python.h>
+#include <python/structmember.h>
 
 #include <string>
 #include <sstream>
@@ -44,6 +44,7 @@ using namespace std;
 #define  SAFE_SPRINTF   snprintf
 #endif
 
+namespace PythonCpp {
 
 //! 获取python异常信息
 struct pyops_t
@@ -3946,4 +3947,5 @@ struct pyclass_method_gen_t<RET (CLASS_TYPE::*)(ARG1, ARG2, ARG3, ARG4, ARG5, AR
     }
 };
 
+}
 #endif
