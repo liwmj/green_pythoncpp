@@ -26,8 +26,8 @@
 #ifndef _PYTHON_PYTHONCPP_H
 #define _PYTHON_PYTHONCPP_H
 
-#include <python/Python.h>
-#include <python/structmember.h>
+#include <Python.h>
+#include <structmember.h>
 
 #include <string>
 #include <sstream>
