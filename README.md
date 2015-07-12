@@ -16,6 +16,7 @@ pythoncpp是C\++库，是嵌入python并注册C\++相关的对象到python的封
 ## 安装
 
 只需要将头文件放置python的include目录下即可使用，当前你也可以选择自己的目录。
+PS：最好系统安装好Python，直接包含头文件即可。
 
 
 ## 支持
