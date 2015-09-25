@@ -16,14 +16,14 @@
  * 
  */
 /**
- * @file pythoncpp.h
+ * @file green_pythoncpp.h
  * @author Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
  * @version 1.1.0
  * @date 2015-05-01
  */
 
-#ifndef _PYTHON_PYTHONCPP_H
-#define _PYTHON_PYTHONCPP_H
+#ifndef _PYTHON_GREEN_PYTHONCPP_H
+#define _PYTHON_GREEN_PYTHONCPP_H
 
 #include <Python.h>
 #include <structmember.h>
@@ -35,7 +35,7 @@ using namespace std;
 #include "pyops_for_embed.h"
 #include "pyops_for_extend.h"
 
-class pythoncpp_t
+class green_pythoncpp_t
 {
     struct reg_info_t
     {
@@ -51,8 +51,8 @@ class pythoncpp_t
     };
 
 public:
-    pythoncpp_t();
-    ~pythoncpp_t();
+    green_pythoncpp_t();
+    ~green_pythoncpp_t();
 
     static int init_py();
     static int final_py();
@@ -69,7 +69,7 @@ public:
 
     //! 注册static function，
     template<typename T>
-    pythoncpp_t& reg(T func_, const string& func_name_, string doc_ = "")
+    green_pythoncpp_t& reg(T func_, const string& func_name_, string doc_ = "")
     {
         reg_info_t tmp;
         tmp.args_num = pyext_func_traits_t<T>::args_num();

@@ -16,13 +16,13 @@
  * 
  */
 /**
- * @file pythoncpp.cpp
+ * @file green_pythoncpp.cpp
  * @author Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
  * @version 1.1.0
  * @date 2015-05-01
  */
 
-#include "pythoncpp.h"
+#include "green_pythoncpp.h"
 
 //! 获取python异常信息
 
@@ -128,29 +128,29 @@ int pyops_t::traceback(string& ret_)
 }
 
 
-pythoncpp_t::pythoncpp_t()
+green_pythoncpp_t::green_pythoncpp_t()
 {
     if (!Py_IsInitialized())
         Py_Initialize();
 }
-pythoncpp_t::~pythoncpp_t()
+green_pythoncpp_t::~green_pythoncpp_t()
 {
     clear_cache_pyobject();
 }
 
 
-int pythoncpp_t::init_py()
+int green_pythoncpp_t::init_py()
 {
     Py_Initialize();
     return 0;
 }
-int pythoncpp_t::final_py()
+int green_pythoncpp_t::final_py()
 {
     Py_Finalize();
     return 0;
 }
 
-int pythoncpp_t::add_path(const string& path_)
+int green_pythoncpp_t::add_path(const string& path_)
 {
     char buff[1024];
     SAFE_SPRINTF(buff, sizeof(buff), "import sys\nif '%s' not in sys.path:\n\tsys.path.append('%s')\n", path_.c_str(), path_.c_str());
@@ -158,13 +158,13 @@ int pythoncpp_t::add_path(const string& path_)
     return 0;
 }
 
-int pythoncpp_t::run_string(const string& py_)
+int green_pythoncpp_t::run_string(const string& py_)
 {
     PyRun_SimpleString(py_.c_str());
     return 0;
 }
 
-int pythoncpp_t::reload(const string& py_name_)
+int green_pythoncpp_t::reload(const string& py_name_)
 {
     PyObject *pName = NULL, *pModule = NULL;
     string err_msg;
@@ -190,7 +190,7 @@ int pythoncpp_t::reload(const string& py_name_)
     Py_DECREF(pNewMod);   
     return 0;
 }
-int pythoncpp_t::load(const string& py_name_)
+int green_pythoncpp_t::load(const string& py_name_)
 {
     PyObject *pName = NULL, *pModule = NULL;
     string err_msg;
@@ -209,7 +209,7 @@ int pythoncpp_t::load(const string& py_name_)
     return 0;
 }
 
-int pythoncpp_t::init(const string& mod_name_, string doc_)
+int green_pythoncpp_t::init(const string& mod_name_, string doc_)
 {
     m_mod_name = mod_name_;
     m_mod_doc  = doc_;
@@ -218,7 +218,7 @@ int pythoncpp_t::init(const string& mod_name_, string doc_)
     return 0;
 }
 
-PyObject* pythoncpp_t::init_method()
+PyObject* green_pythoncpp_t::init_method()
 {
     string mod_name_ = m_mod_name;
     string doc_      = m_mod_doc;
@@ -306,7 +306,7 @@ PyObject* pythoncpp_t::init_method()
     return m;
 }
 
-int pythoncpp_t::init_pyclass(PyObject* m)
+int green_pythoncpp_t::init_pyclass(PyObject* m)
 {
     for (size_t i = 0; i < m_all_pyclass.size(); ++i)
     {
@@ -555,7 +555,7 @@ int pythoncpp_t::init_pyclass(PyObject* m)
 }
 
 
-bool pythoncpp_t::is_method_exist(const vector<pyclass_regigster_tool_t::method_info_t>& src_, const string& new_)
+bool green_pythoncpp_t::is_method_exist(const vector<pyclass_regigster_tool_t::method_info_t>& src_, const string& new_)
 {
     for (size_t i = 0; i < src_.size(); ++i)
     {
@@ -566,7 +566,7 @@ bool pythoncpp_t::is_method_exist(const vector<pyclass_regigster_tool_t::method_
     }
     return false;
 }
-bool pythoncpp_t::is_property_exist(const vector<pyclass_regigster_tool_t::property_info_t>& src_, const string& new_)
+bool green_pythoncpp_t::is_property_exist(const vector<pyclass_regigster_tool_t::property_info_t>& src_, const string& new_)
 {
     for (size_t i = 0; i < src_.size(); ++i)
     {
@@ -577,7 +577,7 @@ bool pythoncpp_t::is_property_exist(const vector<pyclass_regigster_tool_t::prope
     }
     return false;
 }
-pyclass_regigster_tool_t* pythoncpp_t::get_pyclass_info_by_name(const string& name_)
+pyclass_regigster_tool_t* green_pythoncpp_t::get_pyclass_info_by_name(const string& name_)
 {
     for (size_t i = 0; i < m_all_pyclass.size(); ++i)
     {

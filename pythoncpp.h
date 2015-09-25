@@ -16,15 +16,15 @@
  * 
  */
 /**
- * @file pythoncpp.h
+ * @file green_pythoncpp.h
  * @brief only header
  * @author Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
  * @version 1.1.0
  * @date 2015-05-01
  */
 
-#ifndef _PYTHON_PYTHONCPP_H
-#define _PYTHON_PYTHONCPP_H
+#ifndef _PYTHON_GREEN_PYTHONCPP_H
+#define _PYTHON_GREEN_PYTHONCPP_H
 
 #include <Python.h>
 #include <structmember.h>
@@ -44,7 +44,7 @@ using namespace std;
 #define  SAFE_SPRINTF   snprintf
 #endif
 
-namespace PythonCpp {
+namespace green_pythoncpp {
 
 //! 获取python异常信息
 struct pyops_t
@@ -587,7 +587,7 @@ public:
 };
 
 
-class pythoncpp_t
+class green_pythoncpp_t
 {
     struct reg_info_t
     {
@@ -603,12 +603,12 @@ class pythoncpp_t
     };
 
 public:
-    pythoncpp_t()
+    green_pythoncpp_t()
     {
         if (!Py_IsInitialized())
             Py_Initialize();
     }
-    ~pythoncpp_t()
+    ~green_pythoncpp_t()
     {
         clear_cache_pyobject();
     }
@@ -685,7 +685,7 @@ public:
 
     //! 注册static function，
     template<typename T>
-    pythoncpp_t& reg(T func_, const string& func_name_, string doc_ = "")
+    green_pythoncpp_t& reg(T func_, const string& func_name_, string doc_ = "")
     {
         reg_info_t tmp;
         tmp.args_num = pyext_func_traits_t<T>::args_num();
