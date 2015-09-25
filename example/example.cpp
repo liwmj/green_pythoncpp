@@ -3,7 +3,7 @@
 #include <cstdlib>
 #endif
 
-#include "python/green_pythoncpp.h"
+#include "green_pythoncpp.h"
 
 #define  TestGuard(X, Y) printf("-------%s begin-----------\n", X);try {Y;}catch(exception& e_){printf("exception<%s>\n", e_.what());}\
         printf("-------%s end-----------\n", X);
