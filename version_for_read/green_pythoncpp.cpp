@@ -17,7 +17,7 @@
  */
 /**
  * @file green_pythoncpp.cpp
- * @author Wim Li <liwangmj@gmail.com> (http://liwangmj.com)
+ * @author Mason Lee <i@liwmj.com> (https://liwmj.com)
  * @version 1.1.0
  * @date 2015-05-01
  */
